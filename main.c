@@ -8,10 +8,11 @@
  *
  * Return: Always 0.
 */
-int main (int argc, char *argv[])
+stack_t *head_stack = NULL;
+int main(int argc, char *argv[])
 {
 	FILE *file = NULL;
-	char *line = NULL, *token_line = NULL;
+	char *line = NULL, *token_line = NULL, *check_instruction = NULL;
 	unsigned int max_len_line = 1024, line_number = 1;
 
 	if (argc != 2)
@@ -25,24 +26,26 @@ int main (int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file <%s>\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	line = malloc(sizeof (char) * max_len_line);
+	line = malloc(sizeof(char) * max_len_line);
 	if (line == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	while (fgets(line, max_len_line, file))
+	while (fgets(line, 1024, file))
 	{
 		token_line = strtok(line, "\n");
-		is_instruction(token_line, line_number);
+		check_instruction = is_instruction(token_line, line_number);
+		if (check_instruction != NULL)
+		{
+			fprintf(stderr, "L<%d>: unknown instruction <%s>",
+			line_number, check_instruction);
+			exit(EXIT_FAILURE);
+		}
 		line_number++;
 	}
+	free_stack(head_stack);
 	free(line);
 	fclose(file);
 	return (0);
 }
-
-/**
- * compilation : gcc -Wall -Werror -Wextra -pedantic *.c -o monty
- * execution : ./monty test/monty_test_<easy>(or)<medium>(or)<hard>.m
-*/

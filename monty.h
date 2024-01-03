@@ -47,13 +47,17 @@ typedef struct instruction_s
 		/*GLOBAL VARIABLE*/
 /*---------------------------------------------------------------------------*/
 
-/*char **head_stack = NULL;*/
+extern stack_t *head_stack;
 
 /*---------------------------------------------------------------------------*/
 		/*PROTOTYPE*/
 /*---------------------------------------------------------------------------*/
 
-void is_instruction(char *line, unsigned int line_number);
+char *is_instruction(char *line, unsigned int line_number);
 int is_push_instruction(char *instruction, unsigned int line_number);
+void push_element(int value);
+void print_element(stack_t **stack, unsigned int line_number);
+void print_stack(stack_t **stack, unsigned int line_number);
+void free_stack(stack_t *head);
 
 #endif
