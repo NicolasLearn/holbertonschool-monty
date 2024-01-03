@@ -44,5 +44,5 @@ int main (int argc, char *argv[])
 
 /**
  * compilation : gcc -Wall -Werror -Wextra -pedantic *.c -o monty
- * execution : ./monty test/monty_test.m
+ * execution : ./monty test/monty_test_<easy>(or)<medium>(or)<hard>.m
 */

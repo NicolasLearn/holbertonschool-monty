@@ -41,7 +41,7 @@ void is_instruction(char *line, unsigned int line_number)
 }
 
 /*---------------------------------------------------------------------------*/
-		/*IS_DIGIT*/
+		/*IS_PUSH_INSTRUCTION*/
 /*---------------------------------------------------------------------------*/
 
 /**
@@ -61,7 +61,7 @@ int is_push_instruction(char *instruction, unsigned int line_number)
 	{
 		str_value = strtok(NULL, " ");
 		int_value = atoi(str_value);
-		if (int_value == 0)
+		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
 			fprintf(stderr, "L<%d>: usage: push integer\n", line_number);
 		/*push_element(head_stack, int_value);*/
 		printf("L%d : instruction = <%s>. Value = <%d>\n", line_number, instruction, int_value);
