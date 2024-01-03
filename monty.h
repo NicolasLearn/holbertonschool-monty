@@ -47,8 +47,13 @@ typedef struct instruction_s
 		/*GLOBAL VARIABLE*/
 /*---------------------------------------------------------------------------*/
 
+/*char **head_stack = NULL;*/
+
 /*---------------------------------------------------------------------------*/
 		/*PROTOTYPE*/
 /*---------------------------------------------------------------------------*/
+
+void is_instruction(char *line, unsigned int line_number);
+int is_push_instruction(char *instruction, unsigned int line_number);
 
 #endif

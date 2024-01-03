@@ -12,7 +12,7 @@ int main (int argc, char *argv[])
 {
 	FILE *file = NULL;
 	char *line = NULL, *token_line = NULL;
-	int max_len_line = 1024, line_number = 1;
+	unsigned int max_len_line = 1024, line_number = 1;
 
 	if (argc != 2)
 	{
@@ -33,15 +33,8 @@ int main (int argc, char *argv[])
 	}
 	while (fgets(line, max_len_line, file))
 	{
-		printf("Line : <%d>. Sentence : %s", line_number, line);
 		token_line = strtok(line, "\n");
-		token_line = strtok(token_line, " ");
-		while (token_line != NULL)
-		{
-			printf("Token = <%s>\n", token_line);
-			token_line = strtok(NULL, " ");
-		}
-		putchar('\n');
+		is_instruction(token_line, line_number);
 		line_number++;
 	}
 	free(line);
