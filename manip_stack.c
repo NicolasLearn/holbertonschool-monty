@@ -8,10 +8,11 @@
  * push_element - Create a stack element and add it to the top of the stack.
  *
  * @value: Is the value of the new stack element.
+ * @stack: Adress to the head of the stack.
 */
-void push_element(int value)
+void push_element(int value, stack_t **stack)
 {
-	stack_t *new_element;
+	stack_t *new_element = NULL, *buf_stack = *stack;
 
 	new_element = malloc(sizeof(stack_t));
 	if (new_element == NULL)
@@ -20,16 +21,16 @@ void push_element(int value)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (head_stack == NULL)
+	if (buf_stack == NULL)
 		new_element->next = NULL;
 	else
 	{
-		head_stack->prev = new_element;
-		new_element->next = head_stack;
+		buf_stack->prev = new_element;
+		new_element->next = *stack;
 	}
 	new_element->n = value;
 	new_element->prev = NULL;
-	head_stack = new_element;
+	*stack = new_element;
 }
 
 /*---------------------------------------------------------------------------*/
