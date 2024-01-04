@@ -54,7 +54,31 @@ void free_stack(stack_t *head)
 }
 
 /*---------------------------------------------------------------------------*/
-		/*POP_ELEMENT*/
+		/*SWAP_LAST_ELEM*/
+/*---------------------------------------------------------------------------*/
+
+/**
+ * swap_last_elem - Swaps the top two elements of the stack.
+ *
+ * @stack: Adress to the head of the stack.
+ * @line_number: Number of the line checked in the file.
+*/
+void swap_last_elem(stack_t **stack, unsigned int line_number)
+{
+	stack_t *buff_stak = *stack;
+	int buf_value;
+
+	if ((buff_stak == NULL) || (buff_stak->next == NULL))
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	buf_value = buff_stak->n;
+	buff_stak->n = buff_stak->next->n;
+	buff_stak->next->n = buf_value;
+  
+/*---------------------------------------------------------------------------*/
+		/*REMOVE_ELEMENT*/
 /*---------------------------------------------------------------------------*/
 
 /**
@@ -77,9 +101,7 @@ void remove_element(stack_t **stack, unsigned int line_number)
 
 	temp = *stack;
 	if (temp->next != NULL)
-	{
 		temp->next->prev = NULL;
-	}
 	*stack = temp->next;
 	free(temp);
 }
