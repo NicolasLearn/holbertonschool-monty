@@ -17,7 +17,7 @@ char *is_instruction(char *line, unsigned int line_number)
 	int index = 0;
 	char *instruction = NULL;
 	instruction_t key_word[] = {
-		{"pint", print_element}, {"pall", print_stack}, {"add", NULL},
+		{"pint", print_element}, {"pall", print_stack}, {"add", add_elem},
 		{"pop", remove_element}, {"swap", swap_last_elem}, {"nop", nop},
 		{NULL, NULL}
 	};
@@ -83,17 +83,20 @@ int is_push_instruction(char *instruction, unsigned int line_number)
 /**
  * print_element - Print the value of the last element added on the stack.
  *
- * @stack: Unused.
- * @line_number: Unused.
+ * @stack: Adress to the head of the stack.
+ * @line_number: Number of the line checked in the file.
 */
 
 void print_element(stack_t **stack, unsigned int line_number)
 {
-	(void) line_number;
-	(void) stack;
+	stack_t *buf_stack = *stack;
 
-	if (head_stack != NULL)
-		printf("%d\n", head_stack->n);
+	if (buf_stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", head_stack->n);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -131,6 +134,6 @@ void print_stack(stack_t **stack, unsigned int line_number)
 */
 void nop(stack_t **stack, unsigned int line_number)
 {
-	(void) stack;
+	(void) *stack;
 	(void) line_number;
 }
