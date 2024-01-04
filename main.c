@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
-		fprintf(stderr, "Error: Can't open file <%s>\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	line = malloc(sizeof(char) * max_len_line);
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		check_instruction = is_instruction(token_line, line_number);
 		if (check_instruction != NULL)
 		{
-			fprintf(stderr, "L<%d>: unknown instruction <%s>",
+			fprintf(stderr, "L%d: unknown instruction %s",
 			line_number, check_instruction);
 			exit(EXIT_FAILURE);
 		}

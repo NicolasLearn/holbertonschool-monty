@@ -66,7 +66,7 @@ int is_push_instruction(char *instruction, unsigned int line_number)
 		int_value = atoi(str_value);
 		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
 		{
-			fprintf(stderr, "L<%d>: usage: push integer\n", line_number);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 		push_element(int_value);
