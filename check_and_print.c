@@ -9,10 +9,11 @@
  *
  * @line: Pointer to the line to be checked.
  * @line_number: Number of the line checked in the file.
+ * @stack: Adress to the head of the stack.
  *
  * Return: NULL if success. Pointer to the instruction not found.
 */
-char *is_instruction(char *line, unsigned int line_number)
+char *is_instruction(char *line, unsigned int line_number, stack_t **stack)
 {
 	int index = 0;
 	char *instruction = NULL;
@@ -25,7 +26,7 @@ char *is_instruction(char *line, unsigned int line_number)
 	instruction = strtok(line, " \t");
 	if (instruction == NULL)
 		return (instruction);
-	if (is_push_instruction(instruction, line_number))
+	if (is_push_instruction(instruction, line_number, stack))
 		instruction = NULL;
 	else
 	{
@@ -33,7 +34,7 @@ char *is_instruction(char *line, unsigned int line_number)
 		{
 			if (strcmp(instruction, key_word[index].opcode) == 0)
 			{
-				key_word[index].f(&head_stack, line_number);
+				key_word[index].f(stack, line_number);
 				instruction = NULL;
 				break;
 			}
@@ -50,29 +51,29 @@ char *is_instruction(char *line, unsigned int line_number)
 /**
  * is_push_instruction - Check if the instruction is push.
  *
- * @instruction: Pointer to the instruction to be checked.
- * @line_number: Number of the line checked in the file.
+ * @instruc: Pointer to the instruction to be checked.
+ * @line_nbr: Number of the line checked in the file.
+ * @stack: Adress to the head of the stack.
  *
  * Return: 1 if success. 0 is not.
 */
-int is_push_instruction(char *instruction, unsigned int line_number)
+int is_push_instruction(char *instruc, unsigned int line_nbr, stack_t **stack)
 {
 	char *str_value = NULL;
 	int int_value = 0, ret_val = 0;
 
-	if (strcmp(instruction, "push") == 0)
+	if (strcmp(instruc, "push") == 0)
 	{
 		str_value = strtok(NULL, " \t");
 		int_value = atoi(str_value);
 		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
 		{
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_nbr);
 			exit(EXIT_FAILURE);
 		}
-		push_element(int_value);
+		push_element(int_value, stack);
 		ret_val = 1;
 	}
-
 	return (ret_val);
 }
 
@@ -96,7 +97,7 @@ void print_element(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	printf("%d\n", head_stack->n);
+	printf("%d\n", buf_stack->n);
 }
 
 /*---------------------------------------------------------------------------*/

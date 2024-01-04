@@ -44,17 +44,11 @@ typedef struct instruction_s
 } instruction_t;
 
 /*---------------------------------------------------------------------------*/
-		/*GLOBAL VARIABLE*/
-/*---------------------------------------------------------------------------*/
-
-extern stack_t *head_stack;
-
-/*---------------------------------------------------------------------------*/
 		/*PROTOTYPE file : CHECK_AND_PRINT*/
 /*---------------------------------------------------------------------------*/
 
-char *is_instruction(char *line, unsigned int line_number);
-int is_push_instruction(char *instruction, unsigned int line_number);
+char *is_instruction(char *line, unsigned int line_number, stack_t **stack);
+int is_push_instruction(char *instruction, unsigned int, stack_t **stack);
 void print_element(stack_t **stack, unsigned int line_number);
 void print_stack(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
@@ -63,7 +57,7 @@ void nop(stack_t **stack, unsigned int line_number);
 		/*PROTOTYPE file : MANIP_STACK*/
 /*---------------------------------------------------------------------------*/
 
-void push_element(int value);
+void push_element(int value, stack_t **stack);
 void free_stack(stack_t *head);
 void swap_last_elem(stack_t **stack, unsigned int line_number);
 void remove_element(stack_t **stack, unsigned int line_number);
