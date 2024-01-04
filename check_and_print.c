@@ -18,7 +18,7 @@ char *is_instruction(char *line, unsigned int line_number)
 	char *instruction = NULL;
 	instruction_t key_word[] = {
 		{"pint", print_element}, {"pall", print_stack}, {"add", NULL},
-		{"pop", remove_element}, {"swap", swap_last_elem}, {"nop", NULL},
+		{"pop", remove_element}, {"swap", swap_last_elem}, {"nop", nop},
 		{NULL, NULL}
 	};
 
@@ -117,4 +117,20 @@ void print_stack(stack_t **stack, unsigned int line_number)
 		printf("%d\n", buf_stack->n);
 		buf_stack = buf_stack->next;
 	}
+}
+
+/*---------------------------------------------------------------------------*/
+		/*NOP*/
+/*---------------------------------------------------------------------------*/
+
+/**
+ * nop - Doesn’t do anything.
+ *
+ * @stack: Unused.
+ * @line_number: Unused.
+*/
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void) stack;
+	(void) line_number;
 }
