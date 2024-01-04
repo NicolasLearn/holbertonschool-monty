@@ -18,7 +18,7 @@ char *is_instruction(char *line, unsigned int line_number)
 	char *instruction = NULL;
 	instruction_t key_word[] = {
 		{"pint", print_element}, {"pall", print_stack}, {"add", NULL},
-		{"pop", NULL}, {"swap", NULL}, {"nop", NULL},
+		{"pop", remove_element}, {"swap", NULL}, {"nop", NULL},
 		{NULL, NULL}
 	};
 
