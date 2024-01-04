@@ -57,6 +57,7 @@ char *is_instruction(char *line, unsigned int line_number);
 int is_push_instruction(char *instruction, unsigned int line_number);
 void print_element(stack_t **stack, unsigned int line_number);
 void print_stack(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 
 /*---------------------------------------------------------------------------*/
 		/*PROTOTYPE file : MANIP_STACK*/
