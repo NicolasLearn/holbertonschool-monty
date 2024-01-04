@@ -23,7 +23,7 @@ char *is_instruction(char *line, unsigned int line_number, stack_t **stack)
 		{NULL, NULL}
 	};
 
-	instruction = strtok(line, " \t");
+	instruction = strtok(line, " \t\r");
 	if (instruction == NULL)
 		return (instruction);
 	if (is_push_instruction(instruction, line_number, stack))
@@ -64,7 +64,7 @@ int is_push_instruction(char *instruc, unsigned int line_nbr, stack_t **stack)
 
 	if (strcmp(instruc, "push") == 0)
 	{
-		str_value = strtok(NULL, " \t");
+		str_value = strtok(NULL, " \t\r");
 		int_value = atoi(str_value);
 		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
 		{
