@@ -99,10 +99,34 @@ void remove_element(stack_t **stack, unsigned int line_number)
 		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
 	temp = *stack;
 	if (temp->next != NULL)
 		temp->next->prev = NULL;
 	*stack = temp->next;
 	free(temp);
+}
+
+/*---------------------------------------------------------------------------*/
+		/*ADD_ELEM*/
+/*---------------------------------------------------------------------------*/
+
+/**
+ * add_elem - Adds the top two elements of the stack.
+ *
+ * @stack: Adress to the head of the stack.
+ * @line_number: Number of the line checked in the file.
+*/
+void add_elem(stack_t **stack, unsigned int line_number)
+{
+	stack_t *buff_stak = *stack;
+	int buf_value;
+
+	if ((buff_stak == NULL) || (buff_stak->next == NULL))
+	{
+		fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	buf_value = buff_stak->n + buff_stak->next->n;
+	buff_stak->next->n = buf_value;
+	remove_element(stack, line_number);
 }
