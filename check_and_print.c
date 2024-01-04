@@ -18,11 +18,11 @@ char *is_instruction(char *line, unsigned int line_number)
 	char *instruction = NULL;
 	instruction_t key_word[] = {
 		{"pint", print_element}, {"pall", print_stack}, {"add", NULL},
-		{"pop", NULL}, {"swap", NULL}, {"nop", NULL},
+		{"pop", remove_element}, {"swap", swap_last_elem}, {"nop", NULL},
 		{NULL, NULL}
 	};
 
-	instruction = strtok(line, " ");
+	instruction = strtok(line, " \t");
 	if (instruction == NULL)
 		return (instruction);
 	if (is_push_instruction(instruction, line_number))
@@ -62,11 +62,11 @@ int is_push_instruction(char *instruction, unsigned int line_number)
 
 	if (strcmp(instruction, "push") == 0)
 	{
-		str_value = strtok(NULL, " ");
+		str_value = strtok(NULL, " \t");
 		int_value = atoi(str_value);
 		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
 		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
 			exit(EXIT_FAILURE);
 		}
 		push_element(int_value);

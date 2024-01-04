@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		check_instruction = is_instruction(token_line, line_number);
 		if (check_instruction != NULL)
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n",
+			fprintf(stderr, "L%u: unknown instruction %s\n",
 			line_number, check_instruction);
 			free_stack(head_stack);
 			free(line);

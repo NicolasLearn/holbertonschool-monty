@@ -64,5 +64,7 @@ void print_stack(stack_t **stack, unsigned int line_number);
 
 void push_element(int value);
 void free_stack(stack_t *head);
+void swap_last_elem(stack_t **stack, unsigned int line_number);
+void remove_element(stack_t **stack, unsigned int line_number);
 
 #endif
