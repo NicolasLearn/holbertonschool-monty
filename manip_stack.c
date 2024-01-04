@@ -52,3 +52,34 @@ void free_stack(stack_t *head)
 	}
 	head = NULL;
 }
+
+/*---------------------------------------------------------------------------*/
+		/*POP_ELEMENT*/
+/*---------------------------------------------------------------------------*/
+
+/**
+ * remove_element - Removes the top element of the stack.
+ * @stack: Adress to the head of the stack.
+ * @line_number: Number of the line checked in the file.
+ *
+ * If the stack is empty, the function prints an error message and exits.
+ */
+
+void remove_element(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if (*stack == NULL)
+	{
+		fprintf(stderr,"L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	temp = *stack;
+	if (temp->next != NULL)
+	{
+		temp->next->prev = NULL;
+	}
+	*stack = temp->next;
+	free(temp);
+}
