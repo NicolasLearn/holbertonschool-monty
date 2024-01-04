@@ -23,14 +23,11 @@ int main(int argc, char *argv[])
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		fclose(file);
 		exit(EXIT_FAILURE); }
 	line = malloc(sizeof(char) * max_len_line);
 	if (line == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
-		free(line);
-		fclose(file);
 		exit(EXIT_FAILURE); }
 	while (fgets(line, max_len_line, file))
 	{
@@ -40,9 +37,6 @@ int main(int argc, char *argv[])
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n",
 			line_number, check_instruction);
-			free_stack(head_stack);
-			free(line);
-			fclose(file);
 			exit(EXIT_FAILURE); }
 		line_number++; }
 	free_stack(head_stack);
