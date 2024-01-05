@@ -5,7 +5,7 @@
 /*---------------------------------------------------------------------------*/
 
 /**
- * is_instruction - check if the input is an instruction.
+ * is_instruction - check if the input is a key word of an instruction.
  *
  * @line: Pointer to the line to be checked.
  * @line_number: Number of the line checked in the file.
@@ -49,7 +49,7 @@ char *is_instruction(char *line, unsigned int line_number, stack_t **stack)
 /*---------------------------------------------------------------------------*/
 
 /**
- * is_push_instruction - Check if the instruction is push.
+ * is_push_instruction - Check if the instruction is "push".
  *
  * @instruc: Pointer to the instruction to be checked.
  * @line_nbr: Number of the line checked in the file.
@@ -65,12 +65,12 @@ int is_push_instruction(char *instruc, unsigned int line_nbr, stack_t **stack)
 	if (strcmp(instruc, "push") == 0)
 	{
 		str_value = strtok(NULL, " \t\r");
-		int_value = atoi(str_value);
-		if ((int_value == 0) && (strcmp(str_value, "0") != 0))
+		if ((str_value == NULL) || !(is_integer(str_value)))
 		{
 			fprintf(stderr, "L%u: usage: push integer\n", line_nbr);
 			exit(EXIT_FAILURE);
 		}
+		int_value = atoi(str_value);
 		push_element(int_value, stack);
 		ret_val = 1;
 	}
@@ -121,20 +121,4 @@ void print_stack(stack_t **stack, unsigned int line_number)
 		printf("%d\n", buf_stack->n);
 		buf_stack = buf_stack->next;
 	}
-}
-
-/*---------------------------------------------------------------------------*/
-		/*NOP*/
-/*---------------------------------------------------------------------------*/
-
-/**
- * nop - Doesn’t do anything.
- *
- * @stack: Unused.
- * @line_number: Unused.
-*/
-void nop(stack_t **stack, unsigned int line_number)
-{
-	(void) *stack;
-	(void) line_number;
 }

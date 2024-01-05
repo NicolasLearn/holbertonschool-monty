@@ -34,27 +34,6 @@ void push_element(int value, stack_t **stack)
 }
 
 /*---------------------------------------------------------------------------*/
-		/*FREE_STACK*/
-/*---------------------------------------------------------------------------*/
-
-/**
- * free_stack - free all stack.
- * @head: Pointer to the head of the list.
- */
-void free_stack(stack_t *head)
-{
-	stack_t *nextElement = head;
-
-	while (nextElement != NULL)
-	{
-		nextElement = head->next;
-		free(head);
-		head = nextElement;
-	}
-	head = NULL;
-}
-
-/*---------------------------------------------------------------------------*/
 		/*SWAP_LAST_ELEM*/
 /*---------------------------------------------------------------------------*/
 
