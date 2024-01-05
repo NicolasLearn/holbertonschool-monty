@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 /*---------------------------------------------------------------------------*/
 		/*STRUCT*/
@@ -51,16 +52,22 @@ char *is_instruction(char *line, unsigned int line_number, stack_t **stack);
 int is_push_instruction(char *instruction, unsigned int, stack_t **stack);
 void print_element(stack_t **stack, unsigned int line_number);
 void print_stack(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
 
 /*---------------------------------------------------------------------------*/
 		/*PROTOTYPE file : MANIP_STACK*/
 /*---------------------------------------------------------------------------*/
 
 void push_element(int value, stack_t **stack);
-void free_stack(stack_t *head);
 void swap_last_elem(stack_t **stack, unsigned int line_number);
 void remove_element(stack_t **stack, unsigned int line_number);
 void add_elem(stack_t **stack, unsigned int line_number);
+
+/*---------------------------------------------------------------------------*/
+		/*PROTOTYPE file : TOOLS*/
+/*---------------------------------------------------------------------------*/
+
+int is_integer(char *str);
+void free_stack(stack_t *head);
+void nop(stack_t **stack, unsigned int line_number);
 
 #endif
